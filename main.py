@@ -4,6 +4,7 @@ from pathlib import Path
 import dataset
 
 app = FastAPI()
+db = dataset.connect('sqlite:///db.sqlite')
 
 static = {}
 
@@ -29,12 +30,15 @@ async def receive_query(contract_id: str = Form(...), network: str = Form(...)):
         return RedirectResponse(url='/query', status_code=302)
 
 @app.get('/query/{namespace}/{reference}/{contract_id}')
-async def display_contract(namespace: str, reference: str, contract_id: str):
+async def display_contract():
     return HTMLResponse(content=static['contract.html'], status_code=200)
 
 @app.post('/query/{namespace}/{reference}/{contract_id}')
 async def set_contract(request: Request, namespace: str, reference: str, contract_id: str):
     form_data = dict(await request.form())
+
+    table = db[f'{namespace}:{reference}']
+    table.upsert(dict(contract_id=contract_id, **form_data), ['contract_id'])
 
     print(form_data)
 
@@ -43,5 +47,7 @@ async def set_contract(request: Request, namespace: str, reference: str, contrac
 
 @app.get('/{namespace}/{reference}/{contract_id}')
 async def get_contract(namespace: str, reference: str, contract_id: str):
-    print(namespace, reference, contract_id)
-    return contract_id
+    table = db[f'{namespace}:{reference}']
+    contract = table.find_one(contract_id=contract_id)
+
+    return contract
