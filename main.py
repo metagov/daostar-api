@@ -2,6 +2,8 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import RedirectResponse, HTMLResponse
 from pathlib import Path
 import dataset
+import uvicorn
+from subprocess import Popen
 
 app = FastAPI()
 db = dataset.connect('sqlite:///db.sqlite')
@@ -54,6 +56,18 @@ async def get_contract(namespace: str, reference: str, contract_id: str):
 
     return {
         "@context": "https://daostar.org",
-        "@type": "DAO",
-        **contract
+        "type": "DAO",
+        "name": contract["dao_name"],
+        "description": contract["dao_description"],
+        "membersURI": contract["members_uri"],
+        "proposalsURI": contract["proposals_uri"],
+        "activityLogURI": contract["activity_log_uri"],
+        "governanceURI": contract["governance_uri"]
     }
+
+if __name__ == '__main__':
+    Popen(['python3', '-m', 'https_redirect'])
+    uvicorn.run('main:app', host='0.0.0.0', port=440,
+        reload=True, reload_dirs=['static'],
+        ssl_keyfile='/etc/letsencrypt/live/daostar.org/privkey.pem',
+        ssl_certfile='/etc/letsencrypt/live/daostar.org/fullchain.pem')

@@ -1,2 +1,4 @@
 fastapi
 dataset
+uvicorn
+python-multipart
