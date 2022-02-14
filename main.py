@@ -52,10 +52,8 @@ async def get_contract(namespace: str, reference: str, contract_id: str):
     table = db[f'{namespace}:{reference}']
     contract = table.find_one(contract_id=contract_id)
 
-    
-
     return {
-        "@context": "https://daostar.org",
+        "@context": "https://daostar.org/schemas",
         "type": "DAO",
         "name": contract["dao_name"],
         "description": contract["dao_description"],

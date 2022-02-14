@@ -62,12 +62,12 @@
     fetch(api_path)
         .then(resp => resp.json())
         .then(data => {
-            load_value("dao_name", data.dao_name);
-            load_value("dao_description", data.dao_description);
-            load_value("members_uri", data.members_uri);
-            load_value("proposals_uri", data.proposals_uri);
-            load_value("activity_log_uri", data.activity_log_uri);
-            load_value("governance_uri", data.governance_uri);
+            load_value("dao_name", data.name);
+            load_value("dao_description", data.description);
+            load_value("members_uri", data.membersURI);
+            load_value("proposals_uri", data.proposalsURI);
+            load_value("activity_log_uri", data.activityLogURI);
+            load_value("governance_uri", data.governanceURI);
             document.getElementById("submit-form").setAttribute("disabled", true);
         });
 </script>
