@@ -67,7 +67,7 @@ async def get_contract(namespace: str, reference: str, contract_id: str):
 
 if __name__ == '__main__':
     Popen(['python3', '-m', 'https_redirect'])
-    uvicorn.run('main:app', host='0.0.0.0', port=440,
+    uvicorn.run('main:app', host='0.0.0.0', port=443,
         reload=True, reload_dirs=['static'],
-        ssl_keyfile='/etc/letsencrypt/live/daostar.org/privkey.pem',
-        ssl_certfile='/etc/letsencrypt/live/daostar.org/fullchain.pem')
+        ssl_keyfile='/etc/letsencrypt/live/api.daostar.org/privkey.pem',
+        ssl_certfile='/etc/letsencrypt/live/api.daostar.org/fullchain.pem')
