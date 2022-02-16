@@ -15,7 +15,7 @@
     <div class="wrapper parallax parallax-base">
     <!-- <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 50vh"> -->
         <div class="container py-5">
-            <div class="card">
+            <div class="card" style="background-color: rgb(233, 233, 233);">
                 <div class="card-body">
                     <form method="post">
                         <div class="d-flex flex-row">
@@ -27,13 +27,36 @@
                             </div>
                             <div class="px-2 flex-grow-1">
                                 <input type="text" class="form-control" id="contract_id" name="contract_id"
-                                    placeholder="0x...">
+                                    placeholder="Enter a contract address">
                             </div>
                             <div>
                                 <button type="submit" class="btn btn-primary">View Endpoint</button>
                             </div>
                         </div>
                     </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-5">
+            <div class="card">
+                <div class="card-body">
+                    <p>
+                        DAOstar Endpoint Service v0.1 (Alderaan)
+This service hosts a DAOstar-compatible API endpoint that can be queried at https://api.daostar.org/eth/ or, more generally, at https://api.daostar.org/. It is currently in alpha, and is provided as-is.
+In future releases, we will add:
+Additional endpoints for membersURI, proposalsURI, and activityLogURI data.
+Permissioning via Web3 login.
+Template implementations of membersURI, proposalsURI, and activityLogURI for popular DAO frameworks such as Gnosis Safe, Compound, Aragon, Tribute, and others.
+Ability to add your own properties (with schema integration).
+Authoring support for governanceURI.
+Cleaner management UI.
+Aliases, including support for EIP3770 addresses and ENS.
+Uptime guarantees.
+Privacy options.
+If you encounter any issues, please add them to our <a href="">GitHub</a> and we will put them on our roadmap. If you have any questions, please join our Discord or sign up for a call.
+v0.1 - Built by Metagov
+                    </p>
                 </div>
             </div>
         </div>
