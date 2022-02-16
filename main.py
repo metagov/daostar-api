@@ -20,7 +20,7 @@ async def home(request: Request):
 
 @app.get('/css/style.css')
 async def style(request: Request):
-    return HTMLResponse(content=static['style.css'], status_code=200)
+    return HTMLResponse(content=static['style.css'], media_type="text/css", status_code=200)
 
 @app.get('/query')
 async def make_query(request: Request):
