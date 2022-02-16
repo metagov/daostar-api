@@ -15,7 +15,17 @@
         <div class="container">
             <div class="card">
                 <div class="card-body">
-                    <h1 id="contract_id"></h1>
+                    <h1 id="contract_id">0x...</h1>
+                    <h5 id="">
+                        Endpoint: <a href="" class="link-secondary" id="endpoint-url"></a>
+                        <a href="javascript:copy_api_url()" class="link-secondary" title="Copy to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                            </svg>
+                        </a>
+                    </h5>
+                    
+                    <hr/>
                     <form method="post">
                         <div class="mb-3">
                             <label for="dao_name" class="form-label">Name</label>
@@ -47,9 +57,6 @@
                             <div class="pe-2">
                                 <button type="submit" id="submit-form" class="btn btn-primary">Update</button>
                             </div>
-                            <div>
-                                <button type="button" class="btn btn-secondary" onclick="copy_api_url()">Copy API Endpoint</button>
-                            </div>
                         </div>
                     </form>
                 </div>
@@ -73,10 +80,14 @@
     const success = params.get("success");
     const success_alert = document.getElementById("contract-success");
 
-    const api_url = window.location.protocol + '//' + window.location.host + '/' + window.location.pathname.split('/').slice(2).join('/');
+    const api_url = window.location.host + '/' + window.location.pathname.split('/').slice(2).join('/');
+
+    document.getElementById("endpoint-url").href = window.location.protocol + '//' + api_url;
+    document.getElementById("endpoint-url").innerHTML = api_url;
+
 
     function copy_api_url() {
-        navigator.clipboard.writeText(api_url);
+        navigator.clipboard.writeText(window.location.protocol + '//' + api_url);
     }
 
     if (success == "true") {
