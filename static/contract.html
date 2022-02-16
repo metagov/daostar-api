@@ -31,28 +31,64 @@
                         <hr/>
                         <form method="post">
                             <div class="mb-3">
-                                <label for="dao_name" class="form-label">Name</label>
-                                <input type="text" class="form-control" id="dao_name" name="dao_name" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
+                                <label for="dao_name" class="form-label">
+                                    Name
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="dao_name" name="dao_name">
                             </div>
                             <div class="mb-3">
-                                <label for="dao_description" class="form-label">Description</label>
-                                <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO"></textarea>
+                                <label for="dao_description" class="form-label">
+                                    Description
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3"></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="members_uri" class="form-label">Members URI</label>
-                                <input type="text" class="form-control" id="members_uri" name="members_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;.">
+                                <label for="members_uri" class="form-label">
+                                    Members URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="members_uri" name="members_uri">
                             </div>
                             <div class="mb-3">
-                                <label for="proposals_uri" class="form-label">Proposals URI</label>
-                                <input type="text" class="form-control" id="proposals_uri" name="proposals_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;.">
+                                <label for="proposals_uri" class="form-label">
+                                    Proposals URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="proposals_uri" name="proposals_uri">
                             </div>
                             <div class="mb-3">
-                                <label for="activity_log_uri" class="form-label">Activity Log URI</label>
-                                <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;.">
+                                <label for="activity_log_uri" class="form-label">
+                                    Activity Log URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri">
                             </div>
                             <div class="mb-3">
-                                <label for="governance_uri" class="form-label">Governance URI</label>
-                                <input type="text" class="form-control" id="governance_uri" name="governance_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file.">
+                                <label for="governance_uri" class="form-label">
+                                    Governance URI
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file">
+                                        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                        <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                    </svg>
+                                </label>
+                                <input type="text" class="form-control" id="governance_uri" name="governance_uri">
                             </div>                        
 
                             <div class="d-flex flex-row">
