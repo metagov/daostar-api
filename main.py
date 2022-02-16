@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Request, Form
-from fastapi.responses import RedirectResponse, HTMLResponse
+from fastapi.responses import RedirectResponse, HTMLResponse, FileResponse
 from pathlib import Path
 import dataset
 import uvicorn
@@ -21,6 +21,10 @@ async def home(request: Request):
 @app.get('/css/style.css')
 async def style(request: Request):
     return HTMLResponse(content=static['style.css'], media_type="text/css", status_code=200)
+
+@app.get('/favicon.ico')
+async def favicon():
+    return FileResponse('favicon.ico')
 
 @app.get('/query')
 async def make_query(request: Request):
@@ -50,7 +54,7 @@ async def display_contract():
 @app.get('/query/{caip}')
 async def redirect_caip(caip: str):
     parts = caip.split(':')
-    if parts != 3:
+    if len(parts) != 3:
         return RedirectResponse(url='/query', status_code=302)
     else:
         return RedirectResponse(url=f'/query/{parts[0]}/{parts[1]}/{parts[2]}', status_code=302)
