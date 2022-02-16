@@ -11,41 +11,52 @@
 </head>
 
 <body>
-    <div class="container py-5 h-100">
-        <div class="card">
-            <div class="card-body">
-                <h1 id="contract_id"></h1>
-                <form method="post">
-                    <div class="mb-3">
-                        <label for="dao_name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="dao_name" name="dao_name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="dao_description" class="form-label">Description</label>
-                        <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3"></textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="members_uri" class="form-label">Members URI</label>
-                        <input type="text" class="form-control" id="members_uri" name="members_uri">
-                    </div>
-                    <div class="mb-3">
-                        <label for="proposals_uri" class="form-label">Proposals URI</label>
-                        <input type="text" class="form-control" id="proposals_uri" name="proposals_uri">
-                    </div>
-                    <div class="mb-3">
-                        <label for="activity_log_uri" class="form-label">Activity Log URI</label>
-                        <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri">
-                    </div>
-                    <div class="mb-3">
-                        <label for="governance_uri" class="form-label">Governance URI</label>
-                        <input type="text" class="form-control" id="governance_uri" name="governance_uri">
-                    </div>
-                    
-                    <button type="submit" id="submit-form" class="btn btn-primary">Submit</button>
-                </form>
+    <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h1 id="contract_id"></h1>
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="dao_name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="dao_name" name="dao_name">
+                        </div>
+                        <div class="mb-3">
+                            <label for="dao_description" class="form-label">Description</label>
+                            <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="members_uri" class="form-label">Members URI</label>
+                            <input type="text" class="form-control" id="members_uri" name="members_uri">
+                        </div>
+                        <div class="mb-3">
+                            <label for="proposals_uri" class="form-label">Proposals URI</label>
+                            <input type="text" class="form-control" id="proposals_uri" name="proposals_uri">
+                        </div>
+                        <div class="mb-3">
+                            <label for="activity_log_uri" class="form-label">Activity Log URI</label>
+                            <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri">
+                        </div>
+                        <div class="mb-3">
+                            <label for="governance_uri" class="form-label">Governance URI</label>
+                            <input type="text" class="form-control" id="governance_uri" name="governance_uri">
+                        </div>
+                        
+                        <button type="submit" id="submit-form" class="btn btn-primary" onclick="show_success()">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+
+    <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert" style="position: absolute; top: 0px; width: 100%">
+        Contract updated!
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+        
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
 </body>
 
 
@@ -58,7 +69,7 @@
 
     document.getElementById("contract_id").innerHTML = window.location.href.split('/').pop();
     let api_path = window.location.pathname.slice(6);
-    
+
     fetch(api_path)
         .then(resp => resp.json())
         .then(data => {
@@ -70,5 +81,6 @@
             load_value("governance_uri", data.governanceURI);
             document.getElementById("submit-form").setAttribute("disabled", true);
         });
+
 </script>
 </html>
