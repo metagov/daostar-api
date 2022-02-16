@@ -35,9 +35,25 @@ async def receive_query(contract_id: str = Form(...), network: str = Form(...)):
     except ValueError:
         return RedirectResponse(url='/query', status_code=302)
 
+@app.get('/query/eth/{contract_id}')
+async def redirect_eth(contract_id: str):
+    return RedirectResponse(url=f'/query/eip155/1/{contract_id}', status_code=302)
+
+@app.get('/query/rinkeby/{contract_id}')
+async def redirect_rinkeby(contract_id: str):
+    return RedirectResponse(url=f'/query/eip155/4/{contract_id}', status_code=302)
+
 @app.get('/query/{namespace}/{reference}/{contract_id}')
 async def display_contract():
     return HTMLResponse(content=static['contract.html'], status_code=200)
+
+@app.get('/query/{caip}')
+async def redirect_caip(caip: str):
+    parts = caip.split(':')
+    if parts != 3:
+        return RedirectResponse(url='/query', status_code=302)
+    else:
+        return RedirectResponse(url=f'/query/{parts[0]}/{parts[1]}/{parts[2]}', status_code=302)
 
 @app.post('/query/{namespace}/{reference}/{contract_id}')
 async def set_contract(request: Request, namespace: str, reference: str, contract_id: str):
@@ -47,7 +63,6 @@ async def set_contract(request: Request, namespace: str, reference: str, contrac
     table.upsert(dict(contract_id=contract_id, **form_data), ['contract_id'])
 
     return RedirectResponse(url=f'/query/{namespace}/{reference}/{contract_id}?success=true', status_code=302)
-
 
 @app.get('/{namespace}/{reference}/{contract_id}')
 async def get_contract(namespace: str, reference: str, contract_id: str):

@@ -70,6 +70,11 @@ body {
     overflow-y: hidden;
 }
 
+.parallax--minus2 {
+    transform: translateZ(-100px) scale(101);
+    z-index: 0;
+}
+
 #stars {
     width: 100%;
     height: 100%;
