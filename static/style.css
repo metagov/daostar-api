@@ -23,6 +23,7 @@
     box-sizing: border-box;
 }
 
+
 :root {
     --font: 'Geogrotesque', 'Roboto Condensed', 'Roboto', 'Arial', sans-serif;
 }
@@ -56,6 +57,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
+    height: fit-content;
 }
 
 .parallax--base {
@@ -67,7 +69,7 @@ body {
     height: 100vh;
     perspective: 1px;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
 }
 
 .parallax--minus2 {

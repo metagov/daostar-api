@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/style.css">
@@ -15,12 +16,12 @@
 
     <div class="wrapper parallax parallax-base">
         <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
-            <div class="container">
+            <div class="container py-5">
                 <div class="card" style="background-color: rgb(233, 233, 233);">
                     <div class="card-body">
                         <h1 id="contract_id">0x...</h1>
                         <h5>
-                            Endpoint: <a href="" class="link-secondary" id="endpoint-url"></a>
+                            Endpoint: <a href="" class="link-secondary" id="endpoint-url" target="_index"></a>
                             <a href="javascript:copy_api_url()" class="link-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
                                     <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
@@ -86,6 +87,8 @@
     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
+
+    document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));
 
     const params = new URLSearchParams(window.location.search);
     const success = params.get("success");
