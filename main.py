@@ -18,6 +18,10 @@ for child in Path('static').iterdir():
 async def home(request: Request):
     return RedirectResponse(url='/query')
 
+@app.get('/css/style.css')
+async def style(request: Request):
+    return HTMLResponse(content=static['style.css'], status_code=200)
+
 @app.get('/query')
 async def make_query(request: Request):
     return HTMLResponse(content=static['query.html'], status_code=200)
@@ -41,8 +45,6 @@ async def set_contract(request: Request, namespace: str, reference: str, contrac
 
     table = db[f'{namespace}:{reference}']
     table.upsert(dict(contract_id=contract_id, **form_data), ['contract_id'])
-
-    print(form_data)
 
     return RedirectResponse(url=f'/query/{namespace}/{reference}/{contract_id}?success=true', status_code=302)
 

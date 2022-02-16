@@ -5,69 +5,75 @@
     <meta charset="UTF-8">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <title>
-        Contract Info
-    </title>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Contract Info</title>
 </head>
 
-<body class="bg-dark">
-    <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
-        <div class="container">
-            <div class="card bg-light shadow">
-                <div class="card-body">
-                    <h1 id="contract_id">0x...</h1>
-                    <h5 id="">
-                        Endpoint: <a href="" class="link-secondary" id="endpoint-url"></a>
-                        <a href="javascript:copy_api_url()" class="link-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
-                                <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
-                            </svg>
-                        </a>
-                    </h5>
-                    
-                    <hr/>
-                    <form method="post">
-                        <div class="mb-3">
-                            <label for="dao_name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="dao_name" name="dao_name" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
-                        </div>
-                        <div class="mb-3">
-                            <label for="dao_description" class="form-label">Description</label>
-                            <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="members_uri" class="form-label">Members URI</label>
-                            <input type="text" class="form-control" id="members_uri" name="members_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;.">
-                        </div>
-                        <div class="mb-3">
-                            <label for="proposals_uri" class="form-label">Proposals URI</label>
-                            <input type="text" class="form-control" id="proposals_uri" name="proposals_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;.">
-                        </div>
-                        <div class="mb-3">
-                            <label for="activity_log_uri" class="form-label">Activity Log URI</label>
-                            <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;.">
-                        </div>
-                        <div class="mb-3">
-                            <label for="governance_uri" class="form-label">Governance URI</label>
-                            <input type="text" class="form-control" id="governance_uri" name="governance_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file.">
-                        </div>                        
+<body>
+    <div class="parallax--wrapper">
+        <div id="mesh"><img src="http://daostar.org/img/mesh.svg"/></div>
 
-                        <div class="d-flex flex-row">
-                            <div class="pe-2">
-                                <button type="submit" id="submit-form" class="btn btn-primary">Update</button>
+    
+    <div class="wrapper parallax parallax-base">
+
+        <div class="container d-flex justify-content-center align-items-center h-100" style="min-height: 100vh">
+            <div class="container">
+                <div class="card bg-light shadow">
+                    <div class="card-body">
+                        <h1 id="contract_id">0x...</h1>
+                        <h5 id="">
+                            Endpoint: <a href="" class="link-secondary" id="endpoint-url"></a>
+                            <a href="javascript:copy_api_url()" class="link-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy to clipboard">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-files" viewBox="0 0 16 16">
+                                    <path d="M13 0H6a2 2 0 0 0-2 2 2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h7a2 2 0 0 0 2-2 2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zm0 13V4a2 2 0 0 0-2-2H5a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1zM3 4a1 1 0 0 1 1-1h7a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4z"/>
+                                </svg>
+                            </a>
+                        </h5>
+                        
+                        <hr/>
+                        <form method="post">
+                            <div class="mb-3">
+                                <label for="dao_name" class="form-label">Name</label>
+                                <input type="text" class="form-control" id="dao_name" name="dao_name" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
                             </div>
-                        </div>
-                    </form>
+                            <div class="mb-3">
+                                <label for="dao_description" class="form-label">Description</label>
+                                <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO"></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="members_uri" class="form-label">Members URI</label>
+                                <input type="text" class="form-control" id="members_uri" name="members_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;.">
+                            </div>
+                            <div class="mb-3">
+                                <label for="proposals_uri" class="form-label">Proposals URI</label>
+                                <input type="text" class="form-control" id="proposals_uri" name="proposals_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;.">
+                            </div>
+                            <div class="mb-3">
+                                <label for="activity_log_uri" class="form-label">Activity Log URI</label>
+                                <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;.">
+                            </div>
+                            <div class="mb-3">
+                                <label for="governance_uri" class="form-label">Governance URI</label>
+                                <input type="text" class="form-control" id="governance_uri" name="governance_uri" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file.">
+                            </div>                        
+
+                            <div class="d-flex flex-row">
+                                <div class="pe-2">
+                                    <button type="submit" id="submit-form" class="btn btn-primary">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert" style="position: absolute; top: 0px; width: 100%">
+            Contract updated!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
     </div>
 
-    <div class="alert alert-success alert-dismissible fade" id="contract-success" role="alert" style="position: absolute; top: 0px; width: 100%">
-        Contract updated!
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-        
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
