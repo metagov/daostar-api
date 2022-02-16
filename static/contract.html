@@ -42,7 +42,15 @@
                             <input type="text" class="form-control" id="governance_uri" name="governance_uri">
                         </div>
                         
-                        <button type="submit" id="submit-form" class="btn btn-primary" onclick="show_success()">Submit</button>
+
+                        <div class="d-flex flex-row">
+                            <div class="pe-2">
+                                <button type="submit" id="submit-form" class="btn btn-primary">Update</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-secondary" onclick="copy_api_url()">Copy API Endpoint</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -61,13 +69,31 @@
 
 
 <script>
-    function load_value(key, val) {
-        elem = document.getElementById(key);
-        elem.value = val;
-        elem.setAttribute("disabled", true);
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get("success");
+    const success_alert = document.getElementById("contract-success");
+
+    const api_url = window.location.protocol + '//' + window.location.host + '/' + window.location.pathname.split('/').slice(2).join('/');
+
+    function copy_api_url() {
+        navigator.clipboard.writeText(api_url);
     }
 
-    document.getElementById("contract_id").innerHTML = window.location.href.split('/').pop();
+    if (success == "true") {
+        success_alert.classList.toggle("show");
+        setTimeout(function() {
+            success_alert.classList.toggle("show");
+        }, 2000);
+    }
+    
+    function load_value(key, val) {
+        elem = document.getElementById(key);
+        if (val) {
+            elem.value = val;
+        }
+    }
+
+    document.getElementById("contract_id").innerHTML = window.location.pathname.split('/').pop();
     let api_path = window.location.pathname.slice(6);
 
     fetch(api_path)
@@ -79,7 +105,6 @@
             load_value("proposals_uri", data.proposalsURI);
             load_value("activity_log_uri", data.activityLogURI);
             load_value("governance_uri", data.governanceURI);
-            document.getElementById("submit-form").setAttribute("disabled", true);
         });
 
 </script>

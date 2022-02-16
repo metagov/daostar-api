@@ -44,7 +44,7 @@ async def set_contract(request: Request, namespace: str, reference: str, contrac
 
     print(form_data)
 
-    return RedirectResponse(url=f'/query/{namespace}/{reference}/{contract_id}', status_code=302)
+    return RedirectResponse(url=f'/query/{namespace}/{reference}/{contract_id}?success=true', status_code=302)
 
 
 @app.get('/{namespace}/{reference}/{contract_id}')
@@ -52,16 +52,20 @@ async def get_contract(namespace: str, reference: str, contract_id: str):
     table = db[f'{namespace}:{reference}']
     contract = table.find_one(contract_id=contract_id)
 
-    return {
-        "@context": "https://daostar.org/schemas",
-        "type": "DAO",
-        "name": contract["dao_name"],
-        "description": contract["dao_description"],
-        "membersURI": contract["members_uri"],
-        "proposalsURI": contract["proposals_uri"],
-        "activityLogURI": contract["activity_log_uri"],
-        "governanceURI": contract["governance_uri"]
-    }
+    if contract:
+        return {
+            "@context": "https://daostar.org/schemas",
+            "type": "DAO",
+            "name": contract["dao_name"],
+            "description": contract["dao_description"],
+            "membersURI": contract["members_uri"],
+            "proposalsURI": contract["proposals_uri"],
+            "activityLogURI": contract["activity_log_uri"],
+            "governanceURI": contract["governance_uri"]
+        }
+    
+    else:
+        return {}
 
 if __name__ == '__main__':
     Popen(['python3', '-m', 'https_redirect'])
