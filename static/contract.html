@@ -142,6 +142,7 @@
 
     if (success == "true") {
         success_alert.classList.toggle("show");
+        window.history.pushState("", "", window.location.pathname)
         setTimeout(function() {
             success_alert.classList.toggle("show");
         }, 2000);
