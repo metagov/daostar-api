@@ -3,9 +3,11 @@ from fastapi.responses import RedirectResponse, HTMLResponse, FileResponse
 from pathlib import Path
 import dataset
 import uvicorn
+import json
+import ipfs
 from subprocess import Popen
 
-DEBUG = True
+DEBUG = False
 
 app = FastAPI()
 db = dataset.connect('sqlite:///db.sqlite')
@@ -53,9 +55,24 @@ async def redirect_rinkeby(contract_id: str):
 async def display_contract():
     return HTMLResponse(content=static['contract.html'], status_code=200)
 
-@app.get('/generate')
-async def display_generator():
-    return HTMLResponse(content=static['generator.html'], status_code=200)
+# @app.get('/generate')
+# async def display_generator():
+#     return HTMLResponse(content=static['generator.html'], status_code=200)
+
+# @app.post('/generate')
+# async def generate_schema(request: Request):
+#     form_data = dict(await request.form())
+#     json_str  = json.dumps(form_data, indent=2)
+
+#     print(json_str)
+    
+#     cid = ipfs.add_file(json_str)
+
+#     print(cid)
+
+#     resp = ipfs.get_file(cid)
+    
+#     return resp
 
 @app.get('/query/{caip}')
 async def redirect_caip(caip: str):
@@ -100,6 +117,6 @@ if __name__ == '__main__':
     
     else:
         Popen(['python3', '-m', 'https_redirect'])
-        uvicorn.run('main:app', host='127.0.0.1', port=443,
+        uvicorn.run('main:app', host='0.0.0.0', port=443,
             ssl_keyfile='/etc/letsencrypt/live/api.daostar.org/privkey.pem',
             ssl_certfile='/etc/letsencrypt/live/api.daostar.org/fullchain.pem')

@@ -21,7 +21,7 @@
                     <div class="card-body">
                         <h1>Generate a DAO Schema</h1>
                         <hr/>
-                        <form onsubmit="submitForm(event)">
+                        <form method="post">
                             <div class="mb-3">
                                 <label for="dao_name" class="form-label">
                                     Name
@@ -115,27 +115,7 @@
         return new bootstrap.Tooltip(tooltipTriggerEl)
     })
 
-    document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));
-
-    const params = new URLSearchParams(window.location.search);
-    const success = params.get("success");
-    const success_alert = document.getElementById("contract-success");
-
-    function submitForm(event) {
-        event.preventDefault();
-        let form = new FormData(event.target);
-        const data = {};
-        form.forEach((value, key) => (data[key] = value));
-        
-        let json = JSON.stringify(data, null, 2);
-
-        let a = document.createElement('a');
-        a.href = URL.createObjectURL(
-            new Blob([json], {type: "text/plain; charset=utf-8"})
-        );
-        a.download = "schema.json";
-        a.click();
-    }
+    document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));    
 
 </script>
 </html>
