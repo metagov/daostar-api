@@ -7,7 +7,7 @@ import json
 import ipfs
 from subprocess import Popen
 
-DEBUG = False
+DEBUG = True
 
 app = FastAPI()
 db = dataset.connect('sqlite:///db.sqlite')
@@ -55,24 +55,24 @@ async def redirect_rinkeby(contract_id: str):
 async def display_contract():
     return HTMLResponse(content=static['contract.html'], status_code=200)
 
-# @app.get('/generate')
-# async def display_generator():
-#     return HTMLResponse(content=static['generator.html'], status_code=200)
+@app.get('/generate')
+async def display_generator():
+    return HTMLResponse(content=static['generator.html'], status_code=200)
 
-# @app.post('/generate')
-# async def generate_schema(request: Request):
-#     form_data = dict(await request.form())
-#     json_str  = json.dumps(form_data, indent=2)
+@app.post('/generate')
+async def generate_schema(request: Request):
+    form_data = dict(await request.form())
+    json_str  = json.dumps(form_data, indent=2)
 
-#     print(json_str)
+    print(json_str)
     
-#     cid = ipfs.add_file(json_str)
-
-#     print(cid)
-
-#     resp = ipfs.get_file(cid)
+    cid = ipfs.add_file(json_str)
     
-#     return resp
+    return RedirectResponse(url='/ipfs/' + cid, status_code=302)
+
+@app.get('/ipfs/{cid}')
+async def get_ipfs(cid: str):
+    return ipfs.get_file(cid)
 
 @app.get('/query/{caip}')
 async def redirect_caip(caip: str):

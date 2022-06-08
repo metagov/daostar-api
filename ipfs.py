@@ -14,6 +14,15 @@ def add_file(file_data):
     else:
         return False
 
+def pin_file(hash):
+    resp = requests.post(
+        url = base_url + "/api/v0/pin/add",
+        params = {"arg": hash}
+    )
+
+    print(resp.json())
+
+
 def get_file(hash):
     resp = requests.post(
         url = base_url + "/api/v0/cat",
