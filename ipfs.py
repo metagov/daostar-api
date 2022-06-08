@@ -22,6 +22,17 @@ def pin_file(hash):
 
     print(resp.json())
 
+def get_pins():
+    resp = requests.post(
+        url = base_url + "/api/v0/pin/ls"
+    )
+
+    if resp.ok:
+        pins_dict = resp.json()
+        return list(pins_dict['Keys'].keys())
+    else:
+        return None
+
 
 def get_file(hash):
     resp = requests.post(

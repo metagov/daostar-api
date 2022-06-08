@@ -72,7 +72,10 @@ async def generate_schema(request: Request):
 
 @app.get('/ipfs/{cid}')
 async def get_ipfs(cid: str):
-    return ipfs.get_file(cid)
+    if cid in ipfs.get_pins():
+        return ipfs.get_file(cid)
+    else:
+        return {"Error": "CID not found in databse"}
 
 @app.get('/query/{caip}')
 async def redirect_caip(caip: str):
