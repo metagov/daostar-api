@@ -1,0 +1,11 @@
+[Unit]
+Description=DAOstar API Service
+After=network.target
+
+[Service]
+WorkingDirectory=/root/daostar-api
+ExecStart=uvicorn --workers 4 main:app
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
