@@ -7,8 +7,6 @@ import json
 import ipfs
 from subprocess import Popen
 
-DEBUG = True
-
 app = FastAPI()
 db = dataset.connect('sqlite:///db.sqlite')
 
@@ -115,11 +113,4 @@ async def get_contract(namespace: str, reference: str, contract_id: str):
         return {}
 
 if __name__ == '__main__':
-    if DEBUG:
-        uvicorn.run('main:app', host='127.0.0.1', port=80)
-    
-    else:
-        Popen(['python3', '-m', 'https_redirect'])
-        uvicorn.run('main:app', host='0.0.0.0', port=443,
-            ssl_keyfile='/etc/letsencrypt/live/api.daostar.org/privkey.pem',
-            ssl_certfile='/etc/letsencrypt/live/api.daostar.org/fullchain.pem')
+    uvicorn.run('main:app', host='127.0.0.1', port=80)
