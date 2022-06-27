@@ -82,10 +82,18 @@ class MutableSchema(Resource):
         return {'success': True}
 
 class Members(Resource):
-    pass
+    def get(self, caip):
+        response = aws.mutable.get_item(
+            Key = {'id': caip}
+        )
 
-class Proposals(Resource):
-    pass
+        if 'Item' in response:
+            return {'members': response['Item']['membersURI']}
+        else:
+            abort(404, message=f'{caip} does not exist')
 
-class ActivityLog(Resource):
-    pass
+class Proposals(Resource): ...
+
+class ActivityLog(Resource): ...
+
+class Governance(Resource): ...
