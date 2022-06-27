@@ -34,10 +34,11 @@ def get_pins():
         return None
 
 
-def get_file(hash):
+def get_file(hash, timeout):
     resp = requests.post(
         url = base_url + "/api/v0/cat",
-        params = {"arg": hash}
+        params = {"arg": hash},
+        timeout=timeout
     )
 
     if resp.ok:
