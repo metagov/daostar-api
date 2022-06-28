@@ -1,58 +1,24 @@
 from flask import request
 from flask_restful import Resource, abort
 from app.connectors import aws
-
-def validate_item(schema, item, required=False, limit=None, default=None):
-    if item in schema:
-        ...
-    else:
-        if required:
-            abort(400, message="'name' is a required field")
-        else:
-            schema[item] = None
-
-def validate_schema():
-    schema = request.get_json(force=True, silent=True)
-    if not schema: abort(400, message='Could not understand request')
-
-    validate_item(schema, 'name', required=True)
-    validate_item(schema, 'description')
-    validate_item(schema, 'membersURI')
-    validate_item(schema, 'proposalsURI')
-    validate_item(schema, 'activityLogURI')
-    validate_item(schema, 'governanceURI')
-
-    return schema
-
-def order_schema(data):
-    key_order = ['name', 'description', 'membersURI', 'proposalsURI', 'activityLogURI', 'governanceURI']
-    ordered_schema = {}
-    for k in key_order:
-        ordered_schema[k] = data[k]
-    return ordered_schema
+from app.utils.schema import format_schema, validate_schema
 
 class MutableSchema(Resource):
     def get(self, caip):
-        response = aws.mutable.get_item(
-            Key = {'id': caip}
-        )
+        item = aws.get_item(caip)
 
-        if 'Item' in response:
-            return order_schema(response['Item'])
+        if item:
+            return format_schema(item)
         else:
-            abort(404, message=f'{caip} does not exist')
+            abort(404, message=f'{caip} not found')
 
     def post(self, caip):
         data = validate_schema()
-
-        print(data)
-
-        response = aws.mutable.put_item(
-            Item = data | {'id': caip}
-        )
-
-        print(response)
-
+        # don't overwrite existing schema
+        if aws.get_item(caip):
+            abort(409, message=f'{caip} already exists')
+            
+        aws.put_item(caip, data)
         return caip
 
     def put(self, caip):
@@ -75,9 +41,7 @@ class MutableSchema(Resource):
         )
 
     def delete(self, caip):
-        aws.mutable.delete_item(
-            Key = {'id': caip}
-        )
+        aws.delete_item(caip)
 
         return {'success': True}
 

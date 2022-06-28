@@ -8,4 +8,34 @@ db = boto3.resource(
     aws_secret_access_key = AWS.SECRET_ACCESS_KEY
 )
 
-mutable = db.Table('Mutable')
+table = db.Table('Mutable')
+
+def get_item(key):
+    response = table.get_item(
+        Key = {AWS.PARTITION_KEY: key}
+    )
+
+    if 'Item' in response:
+        return response['Item']
+    else:
+        return None
+
+def put_item(key, item):
+    if AWS.PARTITION_KEY not in item:
+        item[AWS.PARTITION_KEY] = key
+
+    response = table.put_item(
+        Item = item
+    )
+
+def update_item(key):
+    response = table.update_item(
+        Key = {AWS.PARTITION_KEY: key},
+        UpdateExpression=None,
+        ExpressionAttributeValues=None
+    )
+
+def delete_item(key):
+    response = table.delete_item(
+        Key = {AWS.PARTITION_KEY: key},
+    )
