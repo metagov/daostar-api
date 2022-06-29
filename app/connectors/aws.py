@@ -46,5 +46,3 @@ def delete_item(table, key):
     response = table.delete_item(
         Key = {AWS.PARTITION_KEY: key},
     )
-
-    print(response)
