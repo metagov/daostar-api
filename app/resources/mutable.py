@@ -1,11 +1,13 @@
 from flask import request
 from flask_restful import Resource, abort
-from app.connectors import aws
+from app.connectors.aws import mutable, get_item, put_item, update_item, delete_item
 from app.utils.schema import format_schema, validate_schema
+from app.utils.caip import validate_caip
 
 class MutableSchema(Resource):
     def get(self, caip):
-        item = aws.get_item(caip)
+        validate_caip(caip)
+        item = mutable(get_item, caip)
 
         if item:
             return format_schema(item)
@@ -13,15 +15,17 @@ class MutableSchema(Resource):
             abort(404, message=f'{caip} not found')
 
     def post(self, caip):
+        validate_caip(caip)
         data = validate_schema()
         # don't overwrite existing schema
-        if aws.get_item(caip):
+        if mutable(get_item, caip):
             abort(409, message=f'{caip} already exists')
             
-        aws.put_item(caip, data)
+        mutable(put_item, caip, data)
         return caip
 
     def put(self, caip):
+        validate_caip(caip)
         exp = 'SET '
         schema = request.json
         update_schema = {}
@@ -34,20 +38,23 @@ class MutableSchema(Resource):
         print(exp)
 
 
-        aws.mutable.update_item(
+        mutable(
+            update_item,
             Key = {'id': caip},
             UpdateExpression=exp,
             ExpressionAttributeValues=update_schema
         )
 
     def delete(self, caip):
-        aws.delete_item(caip)
+        validate_caip(caip)
+        mutable(delete_item, caip)
 
         return {'success': True}
 
 class Members(Resource):
     def get(self, caip):
-        response = aws.mutable.get_item(
+        response = mutable(
+            get_item,
             Key = {'id': caip}
         )
 

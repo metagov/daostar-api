@@ -1,7 +1,9 @@
 from flask import request
 from flask_restful import Resource, abort
 import json
-from app.connectors import ipfs
+from app.connectors import ipfs, pinata
+from app.utils.schema import validate_schema
+from app.connectors.aws import immutable, get_item, put_item
 
 class ImmutableSchema(Resource):
     def get(self, cid):
@@ -9,9 +11,9 @@ class ImmutableSchema(Resource):
         return schema, 200
 
     def post(self):
-        parser = schema_parser.copy()
-        params = parser.parse_args()
+        data = validate_schema()
 
-        cid = ipfs.add_file(json.dumps(params, indent=2))
+        cid1 = ipfs.add_json(data)
+        cid2 = pinata.add_json(data)
 
-        return {'cid': cid}, 200
+        return {'id': cid2}

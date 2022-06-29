@@ -1,25 +1,26 @@
 import requests
+import json
 from app.constants import Pinata
-
-url = "https://api.pinata.cloud/pinning/pinJSOnToIPFS"
 
 headers = {
     "pinata_api_key":        Pinata.API_KEY,
     "pinata_secret_api_key": Pinata.SECRET_API_KEY
 }
 
-def pin_file(data, name=None):
-    payload = {
-        "pinataOptions": {
-            "cidVersion": 1
-        },
-        "pinataContent": data
-    }
-
+def add_file(file_data):
     resp = requests.post(
-        url=url,
+        url = Pinata.BASE_URL + '/pinning/pinFileToIPFS',
         headers=headers,
-        json=payload
+        files = {'file': ('data.txt', file_data)}
     )
 
-    return resp.json()
+    if resp.ok:
+        resp_data = resp.json()
+        return resp_data['IpfsHash']
+    else:
+        return None
+
+def add_json(json_data):
+    # converts to dictionary to minified json
+    text = json.dumps(json_data, separators=(',', ':'))
+    return add_file(text)

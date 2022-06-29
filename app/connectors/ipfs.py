@@ -1,30 +1,33 @@
 import requests
-
-base_url = "http://localhost:5001"
+import json
+from app.constants import IPFS
 
 def add_file(file_data):
     resp = requests.post(
-        url = base_url + "/api/v0/add",
-        files = {"file": ("schema.json", file_data)}
+        url = IPFS.BASE_URL + "/api/v0/add",
+        files = {"file": ("data.txt", file_data)}
     )
 
     if resp.ok:
-        data = resp.json()
-        return data['Hash']
+        resp_data = resp.json()
+        return resp_data['Hash']
     else:
-        return False
+        return None
+
+def add_json(json_data):
+    # converts to dictionary to minified json
+    text = json.dumps(json_data, separators=(',', ':'))
+    return add_file(text)
 
 def pin_file(hash):
     resp = requests.post(
-        url = base_url + "/api/v0/pin/add",
+        url = IPFS.BASE_URL + "/api/v0/pin/add",
         params = {"arg": hash}
     )
 
-    print(resp.json())
-
 def get_pins():
     resp = requests.post(
-        url = base_url + "/api/v0/pin/ls"
+        url = IPFS.BASE_URL + "/api/v0/pin/ls"
     )
 
     if resp.ok:
@@ -36,7 +39,7 @@ def get_pins():
 
 def get_file(hash, timeout):
     resp = requests.post(
-        url = base_url + "/api/v0/cat",
+        url = IPFS.BASE_URL + "/api/v0/cat",
         params = {"arg": hash},
         timeout=timeout
     )
