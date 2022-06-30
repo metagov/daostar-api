@@ -35,7 +35,7 @@ class MutableSchema(Resource):
         validate_caip(caip)
         mutable(delete_item, caip)
 
-        return {'success': True}
+        return None, 204
 
 class Members(Resource):
     def get(self, caip):
