@@ -12,8 +12,8 @@ class ImmutableSchema(Resource):
     def post(self):
         data = validate_schema()
 
-        cid1 = ipfs.add_json(data)
-        cid2 = pinata.add_json(data)
+        cid1 = ipfs.add_json(format_schema(data))
+        cid2 = pinata.add_json(format_schema(data))
         immutable(put_item, cid2, data)
 
         return {'id': cid2}
