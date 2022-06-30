@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 WorkingDirectory=/root/daostar-api
-ExecStart=uvicorn --workers 4 main:app
+ExecStart=uvicorn --workers 4 app:flask_app
 Restart=always
 
 [Install]

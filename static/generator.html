@@ -21,66 +21,66 @@
                     <div class="card-body">
                         <h1>Generate a DAO Schema</h1>
                         <hr/>
-                        <form method="post">
+                        <form id="form" method="post">
                             <div class="mb-3">
-                                <label for="dao_name" class="form-label">
+                                <label for="name" class="form-label">
                                     Name
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Name of the DAO">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control" id="dao_name" name="dao_name" placeholder="E.g. ExampleDAO">
+                                <input type="text" class="form-control" id="name" name="name" placeholder="E.g. ExampleDAO">
                             </div>
                             <div class="mb-3">
-                                <label for="dao_description" class="form-label">
+                                <label for="description" class="form-label">
                                     Description
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="Description of the DAO">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <textarea type="text" class="form-control" id="dao_description" name="dao_description" rows="3" placeholder="E.g. ExampleDAO is a simple, easy-to-join DAO for the imaginary people who only exist in examples."></textarea>
+                                <textarea type="text" class="form-control" id="description" name="description" rows="3" placeholder="E.g. ExampleDAO is a simple, easy-to-join DAO for the imaginary people who only exist in examples."></textarea>
                             </div>
                             <div class="mb-3">
-                                <label for="members_uri" class="form-label">
+                                <label for="membersURI" class="form-label">
                                     Members URI
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The membersURI should point to a JSON file that conforms to the &quot;EIP-1234 Members JSON-LD Schema&quot;">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control" id="members_uri" name="members_uri" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/members, or https://ipfs.io/ipfs/Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu">
+                                <input type="text" class="form-control" id="membersURI" name="membersURI" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/members, or https://ipfs.io/ipfs/Qme7ss3ARVgxv6rXqVPiikMJ8u2NLgmgszg13pYrDKEoiu">
                             </div>
                             <div class="mb-3">
-                                <label for="proposals_uri" class="form-label">
+                                <label for="proposalsURI" class="form-label">
                                     Proposals URI
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The proposalsURI should point to a JSON file that conforms to the &quot;EIP-1234 Proposals JSON-LD Schema&quot;">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control" id="proposals_uri" name="proposals_uri" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/proposals or https://exampledao.xyz/proposals.json">
+                                <input type="text" class="form-control" id="proposalsURI" name="proposalsURI" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/proposals or https://exampledao.xyz/proposals.json">
                             </div>
                             <div class="mb-3">
-                                <label for="activity_log_uri" class="form-label">
+                                <label for="activityLogURI" class="form-label">
                                     Activity Log URI
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The activityLogURI should point to a JSON file that conforms to the &quot;EIP-1234 Activity Log JSON-LD Schema&quot;">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control" id="activity_log_uri" name="activity_log_uri" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/activityLog or http://exampledao.github.io/activityLog.json">
+                                <input type="text" class="form-control" id="activityLogURI" name="activityLogURI" placeholder="E.g. https://api.daostar.org/eip155/1/0x123abc/activityLog or http://exampledao.github.io/activityLog.json">
                             </div>
                             <div class="mb-3">
-                                <label for="governance_uri" class="form-label">
+                                <label for="governanceURI" class="form-label">
                                     Governance URI
                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-info-circle" viewBox="0 0 16 16" data-bs-toggle="tooltip" data-bs-placement="top" title="The governanceURI should point to a flatfile, normatively a .md file.">
                                         <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                         <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
                                     </svg>
                                 </label>
-                                <input type="text" class="form-control" id="governance_uri" name="governance_uri" placeholder="E.g. https://github.com/ExampleDAO/ExampleDAO/governance.md">
+                                <input type="text" class="form-control" id="governanceURI" name="governanceURI" placeholder="E.g. https://github.com/ExampleDAO/ExampleDAO/governance.md">
                             </div>                        
 
                             <div class="d-flex flex-row">
@@ -116,6 +116,22 @@
     })
 
     document.querySelector("meta[name=viewport]").setAttribute('content', 'width=device-width, initial-scale='+(1/window.devicePixelRatio));    
+
+    var form = document.getElementById("form");
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        const form_data = new FormData(form).entries();
+        const response = await fetch(
+            '/immutable',
+            {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(Object.fromEntries(form_data))
+            });
+
+        const result = await response.json();
+        window.location.href = `/immutable/${result.id}`;
+    });
 
 </script>
 </html>
