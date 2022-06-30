@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource, abort
 from app.connectors.aws import mutable, get_item, put_item, update_item, delete_item
-from app.utils.schema import format_schema, validate_schema
+from app.utils.schema import validate_json, validate_schema, format_schema
 from app.utils.caip import validate_caip
 
 class MutableSchema(Resource):
@@ -26,24 +26,10 @@ class MutableSchema(Resource):
 
     def put(self, caip):
         validate_caip(caip)
-        exp = 'SET '
-        schema = request.json
-        update_schema = {}
+        data = validate_json()
 
-        for k in schema.keys():
-            exp += f'{k} = :{k}'
-            update_schema[':' + k] = schema[k]
-
-        print(schema)
-        print(exp)
-
-
-        mutable(
-            update_item,
-            Key = {'id': caip},
-            UpdateExpression=exp,
-            ExpressionAttributeValues=update_schema
-        )
+        item = mutable(update_item, caip, data)
+        return format_schema(item)
 
     def delete(self, caip):
         validate_caip(caip)

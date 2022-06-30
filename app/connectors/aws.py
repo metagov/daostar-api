@@ -22,10 +22,7 @@ def get_item(table, key):
         Key = {AWS.PARTITION_KEY: key}
     )
 
-    if 'Item' in response:
-        return response['Item']
-    else:
-        return None
+    return response.get('Item')
 
 def put_item(table, key, item):
     if AWS.PARTITION_KEY not in item:
@@ -35,12 +32,40 @@ def put_item(table, key, item):
         Item = item
     )
 
-def update_item(table, key):
+def update_item(table, key, item):
+    expression = 'SET '
+    attribute_values = {}
+    attribute_names = {}
+
+    # generates update expression, formatted as
+    # SET value1 = :val1, value2 = :val2
+    for c, k in enumerate(item.keys()):
+        sub_exp = f'{k} = :{k}'
+        # 'name' is a reserved keyword, so an alias must be used
+        if k == 'name':
+            sub_exp = '#N = :name'
+            attribute_names = {'#N': 'name'}
+        expression += sub_exp
+        if c < len(item.keys()) -1: expression += ', '
+        attribute_values[':' + k] = item[k]
+
+    params = {
+        'UpdateExpression': expression,
+        'ExpressionAttributeNames': attribute_names,
+        'ExpressionAttributeValues': attribute_values,
+        'ReturnValues': 'ALL_NEW'
+    }
+
+    if not attribute_names: del params['ExpressionAttributeNames']
+
+    print(params)
+
     response = table.update_item(
         Key = {AWS.PARTITION_KEY: key},
-        UpdateExpression=None,
-        ExpressionAttributeValues=None
+        **params
     )
+
+    return response.get('Attributes')
 
 def delete_item(table, key):
     response = table.delete_item(

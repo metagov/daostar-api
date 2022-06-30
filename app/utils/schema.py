@@ -10,9 +10,13 @@ def validate_item(schema, item, required=False, limit=None, default=None):
         else:
             schema[item] = None
 
+def validate_json():
+    data = request.get_json(force=True, silent=True)
+    if not data: abort(400, message='Could not understand request')
+    return data
+
 def validate_schema():
-    schema = request.get_json(force=True, silent=True)
-    if not schema: abort(400, message='Could not understand request')
+    schema = validate_json()
 
     validate_item(schema, 'name', required=True)
     validate_item(schema, 'description')
