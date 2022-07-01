@@ -11,3 +11,5 @@ def validate_caip(account_id):
         abort(400, message='Invalid namespace reference')
     if not Web3.isAddress(account_address):
         abort(400, message='Invalid address')
+
+    return namespace, reference, account_address

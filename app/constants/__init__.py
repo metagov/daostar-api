@@ -1,10 +1,12 @@
 from dotenv import load_dotenv
-import os
+import os, json
+from pathlib import Path
 
 load_dotenv()
 
+
 class AWS:
-    REGION_NAME       = os.getenv('AWS_REGION_NAME')
+    REGION_NAME       = 'us-east-2'
     ACCESS_KEY_ID     = os.getenv('AWS_ACCESS_KEY_ID')
     SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     MUTABLE_TABLE     = 'Mutable'
@@ -19,6 +21,12 @@ class Pinata:
     API_KEY           = os.getenv('PINATA_API_KEY')
     SECRET_API_KEY    = os.getenv('PINATA_SECRET_API_KEY')
 
+class Alchemy:
+    MAINNET_BASE_URL = 'https://eth-mainnet.g.alchemy.com/v2/'
+    RINKEBY_BASE_URL = 'https://eth-rinkeby.alchemyapi.io/v2/'
+    MAINNET_API_KEY  = os.getenv('ALCHEMY_MAINNET_API_KEY')
+    RINKEBY_API_KEY  = os.getenv('ALCHEMY_RINKEBY_API_KEY')
+
 class CAIP10:
     valid_chain_ids = {
         'eip155': [ # Ethereum
@@ -29,3 +37,6 @@ class CAIP10:
             '42'    # Kovan
         ]
     }
+
+class EIP4824:
+    ABI = json.load(open(Path(__file__).parent.absolute() / 'abi.json', 'r'))

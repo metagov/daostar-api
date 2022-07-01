@@ -37,7 +37,7 @@ def get_pins():
         return None
 
 
-def get_file(hash, timeout):
+def get_file(hash, timeout=5):
     resp = requests.post(
         url = IPFS.BASE_URL + "/api/v0/cat",
         params = {"arg": hash},
