@@ -1,11 +1,13 @@
 from flask import Flask, Response
 from flask_restful import Api
+from flask_cors import CORS
 from app.resources.mutable import MutableSchema, Members, Proposals, ActivityLog, Governance
 from app.resources.immutable import ImmutableSchema
 from app.resources.resolve import ResolveSchema
 
 flask_app = Flask('DAOstar API')
 api = Api(flask_app)
+cors = CORS(flask_app, origins=["http://127.0.0.1:5500", "https://daostar.org"])
 
 @flask_app.get('/')
 async def query():
