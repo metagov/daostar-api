@@ -1,4 +1,7 @@
-fastapi
-dataset
-uvicorn
-python-multipart
+boto3
+flask[async]
+flask_restful
+flask_cors
+gunicorn
+python-dotenv
+web3

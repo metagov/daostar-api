@@ -151,8 +151,6 @@
 
     const checkboxElem = document.getElementById("isImmutable");
     const caipElem = document.getElementById("caip");
-    const network = document.getElementById("network").value;
-    const contract_id = document.getElementById("contract_id").value;
 
     if (checkboxElem.checked == true) {
         caipElem.removeAttribute("hidden");
@@ -170,6 +168,9 @@
     form.addEventListener('submit', async function (e) {
         e.preventDefault();
         const form_data = Object.fromEntries(new FormData(form).entries());
+
+        const network = document.getElementById("network").value;
+        const contract_id = document.getElementById("contract_id").value;
 
         console.log(form_data);
 
