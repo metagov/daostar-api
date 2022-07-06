@@ -14,6 +14,18 @@ def add_file(file_data):
     else:
         return None
 
+def remove_file(hash):
+    resp = requests.post(
+        url = IPFS.BASE_URL + "/api/v0/pin/rm",
+        params = {"arg": hash}
+    )
+
+def wipe_files():
+    pinned = get_pins()
+    for p in pinned:
+        print(p)
+        remove_file(p)
+
 def add_json(json_data):
     # converts to dictionary to minified json
     text = json.dumps(json_data, separators=(',', ':'))
