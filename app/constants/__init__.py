@@ -34,7 +34,10 @@ class CAIP10:
             '3',    # Ropsten
             '4',    # Rinkeby
             '5',    # Goerli
-            '42'    # Kovan
+            '42',   # Kovan
+            '56',   # Binance Smart Chain
+            '100',  # Gnosis Chain
+            '137'   # Polygon
         ]
     }
 
