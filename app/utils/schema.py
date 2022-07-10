@@ -15,8 +15,8 @@ def validate_json():
     if not data: abort(400, message='Could not understand request')
     return data
 
-def validate_schema():
-    schema = validate_json()
+def validate_schema(schema=None):
+    if not schema: schema = validate_json()
 
     validate_item(schema, 'name', required=True)
     validate_item(schema, 'description')

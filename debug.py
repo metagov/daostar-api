@@ -1,3 +1,3 @@
-from app import flask_app
+from app import main
 
-flask_app.run(debug=True, port=8000)
+main.run(debug=True, port=8000)
