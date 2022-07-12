@@ -3,6 +3,7 @@ from flask_restful import Resource, abort
 from app.connectors import ipfs, pinata
 from app.utils.schema import validate_schema, format_schema
 from app.connectors.aws import immutable, get_item, put_item
+from app.constants import Web
 
 class CreateImmutableSchema(Resource):
     def post(self):
@@ -14,7 +15,7 @@ class CreateImmutableSchema(Resource):
 
         return {
             'cid': cid1, 
-            'url': f'https://api.daostar.org/immutable/{cid1}'
+            'url': Web.host + 'https://api.daostar.org/immutable/' + cid1
         }
 
 class ViewImmutableSchema(Resource):

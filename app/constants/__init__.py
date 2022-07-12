@@ -5,6 +5,9 @@ from pathlib import Path
 load_dotenv()
 
 
+class Web:
+    host              = 'http://127.0.0.1:8000'
+
 class AWS:
     REGION_NAME       = 'us-east-2'
     ACCESS_KEY_ID     = os.getenv('AWS_ACCESS_KEY_ID')
