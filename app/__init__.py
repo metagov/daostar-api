@@ -15,7 +15,7 @@ def resource_not_found(e):
 
 @main.route('/')
 def landing_page():
-    return {'message': 'API service for DAOstar, access via https://daostar.org/query'}, 200
+    return {'message': 'API service for DAOstar, access via https://daostar.org/api'}, 200
 
 api.add_resource(CreateMutableSchema, '/mutable', '/mutable/')
 api.add_resource(InteractMutableSchema, '/mutable/<caip>')
