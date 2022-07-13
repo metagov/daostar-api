@@ -7,7 +7,7 @@ from app.resources.resolve import ResolveSchema
 
 main = Flask('DAOstar API')
 api = Api(main)
-cors = CORS(main, origins=['http://127.0.0.1:5000', 'https://daostar.org'])
+cors = CORS(main, origins=['http://localho.st:5000', 'https://daostar.org'])
 
 @main.errorhandler(404)
 def resource_not_found(e):
