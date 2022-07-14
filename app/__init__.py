@@ -1,9 +1,13 @@
 from flask import Flask, Response
 from flask_restful import Api
 from flask_cors import CORS
-from app.resources.mutable import CreateMutableSchema, InteractMutableSchema
-from app.resources.immutable import CreateImmutableSchema, ViewImmutableSchema
-from app.resources.resolve import ResolveSchema
+from app.resources import (
+    CreateMutableSchema,
+    InteractMutableSchema,
+    CreateImmutableSchema,
+    ViewImmutableSchema,
+    ResolveSchema
+)
 
 main = Flask('DAOstar API')
 api = Api(main)
