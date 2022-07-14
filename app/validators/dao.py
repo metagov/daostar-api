@@ -1,13 +1,15 @@
 from marshmallow import Schema, fields, validate, INCLUDE
-from app.validators import Caip10
+from app.validators.fields import Caip10, Uri
 
 class DaoSchema(Schema):
+    context         = fields.String(data_key="@context", dump_default="http://www.daostar.org/schemas")
+    type            = fields.String(dump_default="DAO")
     name            = fields.String(required=True)
     description     = fields.String()
-    membersURI      = fields.Url(schemes={'ipfs'})
-    proposalsURI    = fields.Url(schemes=('ipfs'))
-    activityLogURI  = fields.Url(schemes={'ipfs'})
-    governanceURI   = fields.Url(schemes={'ipfs'})
+    membersURI      = Uri()
+    proposalsURI    = Uri()
+    activityLogURI  = Uri()
+    governanceURI   = Uri()
 
     class Meta:
         ordered = True

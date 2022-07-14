@@ -7,6 +7,7 @@ load_dotenv()
 
 class Web:
     host              = 'http://127.0.0.1:8000'
+    valid_schemes     = {'http', 'https', 'ipfs'}
 
 class AWS:
     REGION_NAME       = 'us-east-2'

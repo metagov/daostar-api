@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, ValidationError, validate
+from marshmallow import fields, ValidationError
 from web3 import Web3
 from app.constants import CAIP10
 
