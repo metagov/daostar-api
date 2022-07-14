@@ -1,7 +1,7 @@
 from flask_restful import Resource, abort
 from app.utils.caip import validate_caip
 from web3 import Web3, HTTPProvider
-from app.connectors.ipfs import get_file
+from app.interfaces.ipfs import get_file
 from app.constants import Alchemy, EIP4824
 from urllib.parse import urlparse
 import requests

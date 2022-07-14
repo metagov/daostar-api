@@ -1,6 +1,6 @@
 from flask import request
 from flask_restful import Resource, abort
-from app.connectors.aws import mutable, get_item, put_item, update_item, delete_item
+from app.interfaces.aws import mutable, get_item, put_item, update_item, delete_item
 from app.utils.schema import validate_json, validate_schema, format_schema
 from app.utils.caip import validate_caip
 from app.constants import Web

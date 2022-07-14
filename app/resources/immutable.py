@@ -1,8 +1,8 @@
 from flask import request
 from flask_restful import Resource, abort
-from app.connectors import ipfs, pinata
+from app.interfaces import ipfs, pinata
 from app.utils.schema import validate_json, validate_schema, format_schema
-from app.connectors.aws import immutable, get_item, put_item
+from app.interfaces.aws import immutable, get_item, put_item
 from app.constants import Web
 
 class CreateImmutableSchema(Resource):
