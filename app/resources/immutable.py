@@ -1,21 +1,20 @@
 from flask import request
 from flask_restful import Resource, abort
 from app.interfaces import ipfs, pinata
-from app.utils.schema import validate_json, validate_schema, format_schema
+from app.utils import validate_json, load_schema, dump_schema
 from app.interfaces.aws import immutable, get_item, put_item
 from app.constants import Web
+from app.validators import DaoSchema, ImmutableDaoSchema
 
 class CreateImmutableSchema(Resource):
     def post(self):
-        body = validate_json()
+        schema = load_schema(ImmutableDaoSchema, validate_json())
+        data = schema['data']
 
-        if 'data' not in body: abort(400, message=f'missing required field: data')
-        
-        schema = body['data']
-        data = validate_schema(schema)
+        output = dump_schema(DaoSchema, data)
 
-        cid1 = ipfs.add_json(format_schema(data))
-        cid2 = pinata.add_json(format_schema(data))
+        cid1 = ipfs.add_json(output)
+        cid2 = pinata.add_json(output)
         immutable(put_item, cid1, data)
 
         return {
@@ -25,5 +24,5 @@ class CreateImmutableSchema(Resource):
 
 class ViewImmutableSchema(Resource):
     def get(self, cid):
-        schema = immutable(get_item, cid)
-        return format_schema(schema)
+        item = immutable(get_item, cid)
+        return dump_schema(DaoSchema, item)

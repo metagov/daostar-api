@@ -4,7 +4,7 @@ from app.constants import CAIP10
 
 class Caip10(fields.Field):
     def _deserialize(self, value, attr, data, **kwargs):
-        if type(value) != str:
+        if not isinstance(value, str):
             raise ValidationError('Not a valid string.')
 
         components = value.split(':')

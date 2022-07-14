@@ -1,23 +1,16 @@
 from flask import request
 from flask_restful import Resource, abort
 from app.interfaces.aws import mutable, get_item, put_item, update_item, delete_item
-from app.utils.schema import validate_json, validate_schema, format_schema
-from app.utils.caip import validate_caip
+from app.utils import validate_json, load_schema, dump_schema, validate_caip
 from app.constants import Web
+from app.validators import DaoSchema, MutableDaoSchema
 
 class CreateMutableSchema(Resource):
     def post(self):
-        body = validate_json()
+        schema = load_schema(MutableDaoSchema, validate_json())
+        caip = schema['caip']
+        data = schema['data']
 
-        if 'caip' not in body: abort(400, message=f'missing required field: caip')
-        if 'data' not in body: abort(400, message=f'missing required field: data')
-        
-        caip = body['caip']
-        validate_caip(caip)
-
-        schema = body['data']
-
-        data = validate_schema(schema)
         # don't overwrite existing schema
         if mutable(get_item, caip): abort(409, message=f'{caip} already exists')
             
@@ -33,14 +26,14 @@ class InteractMutableSchema(Resource):
         item = mutable(get_item, caip)
 
         if not item: abort(404, message=f'{caip} not found')
-        return format_schema(item)
+        return dump_schema(DaoSchema, item)
 
     def put(self, caip):
         validate_caip(caip)
         data = validate_json()
 
         item = mutable(update_item, caip, data)
-        return format_schema(item)
+        return dump_schema(DaoSchema, item)
 
     def delete(self, caip):
         validate_caip(caip)
