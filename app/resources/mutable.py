@@ -3,16 +3,16 @@ from flask_restful import Resource, abort
 from app.interfaces.aws import mutable, get_item, put_item, update_item, delete_item
 from app.utils import validate_json, load_schema, dump_schema, validate_caip
 from app.constants import Web
-from app.validators import DaoSchema, MutableDaoSchema
+from app.validators import DaoSchema, InputCaipWithDaoSchema, InputDaoSchema
 
 class CreateMutableSchema(Resource):
     def post(self):
-        schema = load_schema(MutableDaoSchema, validate_json())
+        schema = load_schema(InputCaipWithDaoSchema, validate_json())
         caip = schema['caip']
         data = schema['data']
 
         # don't overwrite existing schema
-        if mutable(get_item, caip): abort(409, message=f'{caip} already exists')
+        if mutable(get_item, caip): abort(409, message=f'Endpoint for {caip} already exists.')
 
         mutable(put_item, caip, data)
 
@@ -25,12 +25,13 @@ class InteractMutableSchema(Resource):
         validate_caip(caip)
         item = mutable(get_item, caip)
 
-        if not item: abort(404, message=f'{caip} not found')
+        if not item: abort(404, message=f'Endpoint for {caip} not found.')
         return dump_schema(DaoSchema, item)
 
     def put(self, caip):
         validate_caip(caip)
-        data = validate_json()
+        schema = load_schema(InputDaoSchema, validate_json())
+        data = schema['data']
 
         item = mutable(update_item, caip, data)
         return dump_schema(DaoSchema, item)

@@ -14,9 +14,9 @@ class DaoSchema(Schema):
     class Meta:
         ordered = True
 
-class MutableDaoSchema(Schema):
+class InputCaipWithDaoSchema(Schema):
     data = fields.Nested(DaoSchema, required=True)
     caip = Caip10(required=True)
 
-class ImmutableDaoSchema(Schema):
+class InputDaoSchema(Schema):
     data = fields.Nested(DaoSchema, required=True)

@@ -15,7 +15,7 @@ class ResolveSchema(Resource):
         elif reference == '4':
             url = Alchemy.RINKEBY_BASE_URL + Alchemy.RINKEBY_API_KEY
         else:
-            abort(400, message="Unsupported chain")
+            abort(400, message="Unsupported chain.")
         
         web3 = Web3(HTTPProvider(url))
 

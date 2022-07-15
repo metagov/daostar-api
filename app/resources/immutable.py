@@ -5,11 +5,11 @@ from app.interfaces import ipfs, pinata
 from app.utils import validate_json, load_schema, dump_schema
 from app.interfaces.aws import immutable, get_item, put_item
 from app.constants import Web
-from app.validators import DaoSchema, ImmutableDaoSchema
+from app.validators import DaoSchema, InputDaoSchema
 
 class CreateImmutableSchema(Resource):
     def post(self):
-        schema = load_schema(ImmutableDaoSchema, validate_json())
+        schema = load_schema(InputDaoSchema, validate_json())
         data = schema['data']
 
         output = dump_schema(DaoSchema, data)
@@ -20,7 +20,7 @@ class CreateImmutableSchema(Resource):
             cid2 = pinata.add_json(output)
             immutable(put_item, cid1, data)
         except ConnectionError:
-            abort(500, errors=["Failed to connect to IPFS network."])
+            abort(500, message="Internal connection to IPFS network failed.")
 
         return {
             'cid': cid1, 

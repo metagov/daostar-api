@@ -15,11 +15,12 @@ cors = CORS(main, origins=['https://daostar.org'])
 
 @main.errorhandler(404)
 def resource_not_found(e):
-    return {'error': '404: not found'}, 404
+    return {'message': 'Resource not found.'}, 404
 
 @main.route('/')
 def landing_page():
     return {'message': 'API service for DAOstar, access via https://daostar.org/api'}, 200
+
 
 api.add_resource(CreateMutableSchema, '/mutable', '/mutable/')
 api.add_resource(InteractMutableSchema, '/mutable/<caip>')
