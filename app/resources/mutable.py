@@ -38,9 +38,10 @@ class InteractMutableSchema(Resource):
 
     def delete(self, caip):
         validate_caip(caip)
+        item = mutable(get_item, caip)
+        if not item: abort(404, message=f'Endpoint for {caip} not found.')
         mutable(delete_item, caip)
-
-        return None, 204
+        return {"message": "Successfully deleted endpoint."}, 200
 
 class Members(Resource): ...
 

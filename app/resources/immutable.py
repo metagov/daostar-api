@@ -24,10 +24,12 @@ class CreateImmutableSchema(Resource):
 
         return {
             'cid': cid1, 
-            'url': Web.host + 'https://api.daostar.org/immutable/' + cid1
+            'url': Web.host + '/immutable/' + cid1
         }
 
 class ViewImmutableSchema(Resource):
     def get(self, cid):
         item = immutable(get_item, cid)
+
+        if not item: abort(404, message=f'Endpoint for {cid} not found.')
         return dump_schema(DaoSchema, item)
