@@ -7,6 +7,7 @@ headers = {
     "pinata_secret_api_key": Pinata.SECRET_API_KEY
 }
 
+# adds a file to Pinata pinning service
 def add_file(file_data):
     resp = requests.post(
         url = Pinata.BASE_URL + '/pinning/pinFileToIPFS',

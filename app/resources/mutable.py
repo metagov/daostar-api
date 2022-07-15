@@ -13,7 +13,7 @@ class CreateMutableSchema(Resource):
 
         # don't overwrite existing schema
         if mutable(get_item, caip): abort(409, message=f'{caip} already exists')
-            
+
         mutable(put_item, caip, data)
 
         return {
@@ -41,17 +41,7 @@ class InteractMutableSchema(Resource):
 
         return None, 204
 
-class Members(Resource):
-    def get(self, caip):
-        response = mutable(
-            get_item,
-            Key = {'id': caip}
-        )
-
-        if 'Item' in response:
-            return {'members': response['Item']['membersURI']}
-        else:
-            abort(404, message=f'{caip} does not exist')
+class Members(Resource): ...
 
 class Proposals(Resource): ...
 

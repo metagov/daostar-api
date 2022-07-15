@@ -1,9 +1,10 @@
+import requests
 from flask_restful import Resource, abort
 from web3 import Web3, HTTPProvider
+from urllib.parse import urlparse
 from app.interfaces.ipfs import get_file
 from app.constants import Alchemy, EIP4824
-from urllib.parse import urlparse
-import requests
+from app.utils import validate_caip
 
 class ResolveSchema(Resource):
     def get(self, caip):
@@ -26,5 +27,5 @@ class ResolveSchema(Resource):
         if o.scheme == 'ipfs':
             return get_file(o.netloc)
 
-        elif o.scheme == 'http':
+        elif (o.scheme == 'http') or (o.scheme == 'https'):
             return requests.get(URI)

@@ -11,12 +11,15 @@ db = boto3.resource(
 mutable_table = db.Table(AWS.MUTABLE_TABLE)
 immutable_table = db.Table(AWS.IMMUTABLE_TABLE)
 
+# wrappers for mutable and immutable tables, easier syntax for db operations
+# ex: mutable(put_item, caip, data)
 def mutable(func, *args, **kwargs):
     return func(mutable_table, *args, **kwargs)
 
 def immutable(func, *args, **kwargs):
     return func(immutable_table, *args, **kwargs)
 
+# retrieves an item from a table
 def get_item(table, key):
     response = table.get_item(
         Key = {AWS.PARTITION_KEY: key}
@@ -24,14 +27,16 @@ def get_item(table, key):
 
     return response.get('Item')
 
+# inserts an item into a table
 def put_item(table, key, item):
-    if AWS.PARTITION_KEY not in item:
-        item[AWS.PARTITION_KEY] = key
+    # if AWS.PARTITION_KEY not in item:
+    item[AWS.PARTITION_KEY] = key
 
     response = table.put_item(
         Item = item
     )
 
+# updates existing table item by replacing or adding key value pairs
 def update_item(table, key, item):
     expression = 'SET '
     attribute_values = {}
@@ -58,8 +63,6 @@ def update_item(table, key, item):
 
     if not attribute_names: del params['ExpressionAttributeNames']
 
-    print(params)
-
     response = table.update_item(
         Key = {AWS.PARTITION_KEY: key},
         **params
@@ -67,6 +70,7 @@ def update_item(table, key, item):
 
     return response.get('Attributes')
 
+# removes an item from a table
 def delete_item(table, key):
     response = table.delete_item(
         Key = {AWS.PARTITION_KEY: key},

@@ -11,11 +11,11 @@ from app.resources import (
 
 main = Flask('DAOstar API')
 api = Api(main)
-cors = CORS(main, origins=['http://localho.st:5000', 'https://daostar.org'])
+cors = CORS(main, origins=['https://daostar.org'])
 
 @main.errorhandler(404)
 def resource_not_found(e):
-    return {'message': '404: not found'}, 404
+    return {'error': '404: not found'}, 404
 
 @main.route('/')
 def landing_page():

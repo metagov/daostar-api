@@ -1,5 +1,6 @@
 from flask import request
 from flask_restful import Resource, abort
+from requests.exceptions import ConnectionError
 from app.interfaces import ipfs, pinata
 from app.utils import validate_json, load_schema, dump_schema
 from app.interfaces.aws import immutable, get_item, put_item
@@ -12,10 +13,14 @@ class CreateImmutableSchema(Resource):
         data = schema['data']
 
         output = dump_schema(DaoSchema, data)
-
-        cid1 = ipfs.add_json(output)
-        cid2 = pinata.add_json(output)
-        immutable(put_item, cid1, data)
+        
+        try:
+            # adds file to local node, pinata, and database
+            cid1 = ipfs.add_json(output)
+            cid2 = pinata.add_json(output)
+            immutable(put_item, cid1, data)
+        except ConnectionError:
+            abort(500, errors=["Failed to connect to IPFS network."])
 
         return {
             'cid': cid1, 
