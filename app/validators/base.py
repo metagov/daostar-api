@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields
+from marshmallow import Schema, fields, EXCLUDE
 from app.constants import SchemaFormat
 
 class BaseSchema(Schema):
@@ -7,3 +7,4 @@ class BaseSchema(Schema):
 
     class Meta:
         ordered = True
+        unknown = EXCLUDE
