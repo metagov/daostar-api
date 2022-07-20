@@ -1,1 +1,1 @@
-from app.validators.dao import DaoSchema, InputCaipWithDaoSchema, InputDaoSchema
+from app.validators.dao import DaoUriSchema, InputCaipWithDaoSchema, InputDaoSchema

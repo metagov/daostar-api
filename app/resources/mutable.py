@@ -3,7 +3,7 @@ from flask_restful import Resource, abort
 from app.interfaces.aws import mutable, get_item, put_item, update_item, delete_item
 from app.utils import validate_json, load_schema, dump_schema, validate_caip
 from app.constants import Web
-from app.validators import DaoSchema, InputCaipWithDaoSchema, InputDaoSchema
+from app.validators import DaoUriSchema, InputCaipWithDaoSchema, InputDaoSchema
 
 class CreateMutableSchema(Resource):
     def post(self):
@@ -26,7 +26,7 @@ class InteractMutableSchema(Resource):
         item = mutable(get_item, caip)
 
         if not item: abort(404, message=f'Endpoint for {caip} not found.')
-        return dump_schema(DaoSchema, item)
+        return dump_schema(DaoUriSchema, item)
 
     def put(self, caip):
         validate_caip(caip)
@@ -34,7 +34,7 @@ class InteractMutableSchema(Resource):
         data = schema['data']
 
         item = mutable(update_item, caip, data)
-        return dump_schema(DaoSchema, item)
+        return dump_schema(DaoUriSchema, item)
 
     def delete(self, caip):
         validate_caip(caip)
