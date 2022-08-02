@@ -20,7 +20,7 @@ def resource_not_found(e):
 
 @main.route('/')
 def landing_page():
-    return {'message': 'API service for DAOstar, access via https://daostar.org/api'}, 200
+    return {'message': 'API service for DAOstar, access via https://daostar.org/api or view documentation at https://daostar.org/api/docs'}, 200
 
 @main.route('/chains')
 def get_chains():
