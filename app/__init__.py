@@ -8,6 +8,7 @@ from app.resources import (
     ViewImmutableSchema,
     ResolveSchema
 )
+from app.constants import CAIP10
 
 main = Flask('DAOstar API')
 api = Api(main)
@@ -21,6 +22,9 @@ def resource_not_found(e):
 def landing_page():
     return {'message': 'API service for DAOstar, access via https://daostar.org/api'}, 200
 
+@main.route('/chains')
+def get_chains():
+    return CAIP10.valid_chain_ids
 
 api.add_resource(CreateMutableSchema, '/mutable', '/mutable/')
 api.add_resource(InteractMutableSchema, '/mutable/<caip>')
