@@ -6,7 +6,9 @@ from app.resources import (
     InteractMutableSchema,
     CreateImmutableSchema,
     ViewImmutableSchema,
-    ResolveSchema
+    ResolveSchema,
+    CreateApiKey,
+    AuthorizeApiKey
 )
 
 main = Flask('DAOstar API')
@@ -31,3 +33,5 @@ api.add_resource(InteractMutableSchema, '/mutable/<caip>')
 api.add_resource(CreateImmutableSchema, '/immutable', '/immutable/')
 api.add_resource(ViewImmutableSchema, '/immutable/<cid>')
 # api.add_resource(ResolveSchema, '/resolve/<caip>')
+api.add_resource(CreateApiKey, '/admin', '/admin/')
+api.add_resource(AuthorizeApiKey, '/admin/<key>')
