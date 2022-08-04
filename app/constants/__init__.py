@@ -15,7 +15,9 @@ class AWS:
     SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
     MUTABLE_TABLE     = 'Mutable'
     IMMUTABLE_TABLE   = 'Immutable'
-    PARTITION_KEY     = 'id'
+    ADMIN_TABLE       = 'Admin'
+    DATA_PART_KEY     = 'id'
+    ADMIN_PART_KEY    = 'key'
 
 class IPFS:
     BASE_URL          = 'http://localhost:5001'
