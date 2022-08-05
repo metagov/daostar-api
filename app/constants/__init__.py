@@ -9,6 +9,9 @@ class Web:
     host              = 'https://api.daostar.org'
     valid_schemes     = {'http', 'https', 'ipfs'}
 
+class Auth:
+    API_KEY_HEADER    = 'daostar_api_key'
+
 class AWS:
     REGION_NAME       = 'us-east-2'
     ACCESS_KEY_ID     = os.getenv('AWS_ACCESS_KEY_ID')

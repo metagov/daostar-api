@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource, abort
 from app.interfaces.aws import mutable, get_item, put_item, update_item, delete_item
-from app.utils import validate_json, load_schema, dump_schema, validate_caip
+from app.utils import *
 from app.constants import Web
 from app.validators import DaoUriSchema, InputCaipWithDaoSchema, InputDaoSchema
 
@@ -30,6 +30,7 @@ class InteractMutableSchema(Resource):
 
     def put(self, caip):
         validate_caip(caip)
+        authorize(caip)
         schema = load_schema(InputDaoSchema, validate_json())
         data = schema['data']
 

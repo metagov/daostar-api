@@ -13,7 +13,7 @@ from app.resources import (
 
 main = Flask('DAOstar API')
 api = Api(main)
-cors = CORS(main, origins=['https://daostar.org'])
+cors = CORS(main, origins=['https://daostar.org', 'https://127.0.0.1:5501'])
 
 @main.errorhandler(404)
 def resource_not_found(e):
