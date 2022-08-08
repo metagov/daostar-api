@@ -1,7 +1,7 @@
 import secrets
 import eth_utils
 from flask_restful import Resource, abort
-from app.interfaces.aws import admin, get_item, put_item, update_item, delete_item
+from app.interfaces.aws import *
 from app.utils import validate_json, load_schema, validate_signature
 from app.validators import InputAdminSchema, AuthorizeAdminSchema
 
@@ -36,9 +36,13 @@ class AuthorizeApiKey(Resource):
         except eth_utils.exceptions.ValidationError:
             abort(400, message='Invalid signature.')
 
-        admin(update_item, key, {
+        auth = admin(update_item, key, {
             'wallet': wallet_address,
             'validated': True
+        })
+
+        mutable(update_item, auth['caip'], {
+            'protected': True
         })
 
         return {

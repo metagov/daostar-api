@@ -10,6 +10,7 @@ class CreateMutableSchema(Resource):
         schema = load_schema(InputCaipWithDaoSchema, validate_json())
         caip = schema['caip']
         data = schema['data']
+        data['protected'] = False
 
         # don't overwrite existing schema
         if mutable(get_item, caip): abort(409, message=f'Endpoint for {caip} already exists.')

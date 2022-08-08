@@ -31,17 +31,6 @@ def get_item(table, partition_key, key):
 
     return response.get('Item')
 
-# queries an item by a secondary index
-def query_item(table, partition_key, query_key, key):
-    response = table.query(
-        IndexName = "caip-index",
-        ExpressionAttributeValues={
-            ":v1": key
-        },
-        KeyConditionExpression=f"{query_key} = :v1"
-    )
-    return response
-
 # inserts an item into a table
 def put_item(table, partition_key, key, item):
     # if partition_key not in item:
