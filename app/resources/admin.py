@@ -48,3 +48,9 @@ class AuthorizeApiKey(Resource):
         return {
             'address': wallet_address
         }
+    
+    def delete(self, key):
+        item = admin(get_item, key)
+        if not item: abort(404, message=f'API key not found.')
+        admin(delete_item, key)
+        return {"message": "Successfully revoked API key."}
