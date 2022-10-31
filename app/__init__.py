@@ -8,11 +8,11 @@ from app.resources import (
     ViewImmutableSchema,
     ResolveSchema
 )
-from app.constants import CAIP10
+from app.constants import CAIP10, Web
 
 main = Flask('DAOstar API')
 api = Api(main)
-cors = CORS(main, origins=['https://daostar.org'])
+cors = CORS(main, origins=Web.cors_origins)
 
 @main.errorhandler(404)
 def resource_not_found(e):

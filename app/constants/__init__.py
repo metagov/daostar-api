@@ -7,6 +7,7 @@ load_dotenv()
 
 class Web:
     host              = 'https://api.daostar.org'
+    cors_origins      = ['https://daostar.org', 'https://beautiful-sunflower-6ae5ca.netlify.app', 'https://127.0.0.1:5501']
     valid_schemes     = {'http', 'https', 'ipfs'}
 
 class AWS:
