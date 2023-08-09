@@ -7,6 +7,7 @@ class DaoUriSchema(BaseSchema):
     description    = fields.String(default=None)
     membersURI     = fields.String(default=None)
     proposalsURI   = fields.String(default=None)
+    issuersURI     = fields.String(default=None)
     activityLogURI = fields.String(default=None)
     governanceURI  = fields.String(default=None)
 
