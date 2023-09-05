@@ -6,5 +6,7 @@ Take a look at our [project plan](https://docs.google.com/document/d/11lAP16YBiP
 
 ## Build and Deployment Instructions
 Local:
+
 ```pip install -r requirements.txt```
+
 ```python3 debug.py```
