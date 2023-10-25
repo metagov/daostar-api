@@ -10,3 +10,17 @@ Local:
 ```pip install -r requirements.txt```
 
 ```python3 debug.py```
+
+## Digital Ocean Droplet Instructions
+
+Once you access console,
+
+```cd daostar-api```
+
+```git branch```
+
+```git checkout master```
+
+```git pull```
+
+```systemctl restart daostar```
