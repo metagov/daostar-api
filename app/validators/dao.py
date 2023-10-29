@@ -10,7 +10,7 @@ class DaoUriSchema(BaseSchema):
     issuersURI     = fields.String(default=None)
     activityLogURI = fields.String(default=None)
     governanceURI  = fields.String(default=None)
-    contractRegistryURI = fields.String(default=None)
+    contractsRegistryURI = fields.String(default=None)
     managerAddress  = fields.String(default=None)
 
 class InputCaipWithDaoSchema(Schema):
