@@ -26,6 +26,15 @@ class Pinata:
     API_KEY           = os.getenv('PINATA_API_KEY')
     SECRET_API_KEY    = os.getenv('PINATA_SECRET_API_KEY')
 
+class DaoDao:
+    JUNO_URL =  'https://search.daodao.zone/indexes/daos/documents',
+    OSMOSIS_URL =         'https://search.daodao.zone/indexes/osmosis_daos/documents',
+    STARGAZE_URL =  'https://search.daodao.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS',
+    API_KEY = os.getenv('DAODAO_API_KEY')
+    SEARCH_API_KEY = os.getenv('DAODAO_SEARCH_API_KEY')
+
+
+
 class Alchemy:
     MAINNET_BASE_URL = 'https://eth-mainnet.g.alchemy.com/v2/'
     RINKEBY_BASE_URL = 'https://eth-rinkeby.alchemyapi.io/v2/'

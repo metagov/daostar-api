@@ -9,6 +9,7 @@ from app.resources import (
     ResolveSchema
 )
 from app.constants import CAIP10, Web
+from app.resources.daodao import fetch_juno_daos, fetch_osmosis_daos, fetch_stargaze_daos
 
 main = Flask('DAOstar API')
 api = Api(main)
@@ -25,6 +26,19 @@ def landing_page():
 @main.route('/chains')
 def get_chains():
     return CAIP10.valid_chain_ids
+# New routes to fetch DAODAO DAO's securly
+@main.route('/fetch_juno_daos', methods=['GET'])
+def get_juno_daos():
+    return fetch_juno_daos()
+
+@main.route('/fetch_osmosis_daos', methods=['GET'])
+def get_osmosis_daos():
+    return fetch_osmosis_daos()
+
+@main.route('/fetch_stargaze_daos', methods=['GET'])
+def get_stargaze_daos():
+    return fetch_stargaze_daos()
+
 
 api.add_resource(CreateMutableSchema, '/mutable', '/mutable/')
 api.add_resource(InteractMutableSchema, '/mutable/<caip>')
