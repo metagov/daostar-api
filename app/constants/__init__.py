@@ -27,9 +27,9 @@ class Pinata:
     SECRET_API_KEY    = os.getenv('PINATA_SECRET_API_KEY')
 
 class DaoDao:
-    JUNO_URL =  'https://search.daodao.zone/indexes/daos/documents?limit=500',
-    OSMOSIS_URL =         'https://search.daodao.zone/indexes/osmosis_daos/documents?limit=500',
-    STARGAZE_URL =  'https://search.daodao.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS&limit=501',
+    JUNO_URL =  'https://search.daodao.zone/indexes/daos/documents',
+    OSMOSIS_URL =         'https://search.daodao.zone/indexes/osmosis_daos/documents',
+    STARGAZE_URL =  'https://search.daodao.zone/indexes/stargaze_daos/search?filter=value.config.name%20EXISTS',
     API_KEY = os.getenv('DAODAO_API_KEY')
     SEARCH_API_KEY = os.getenv('DAODAO_SEARCH_API_KEY')
 
