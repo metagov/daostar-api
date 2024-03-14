@@ -47,7 +47,7 @@ class CAIP10:
     }
 
 class SchemaFormat:
-    context = "<http://www.daostar.org/schemas>"
+    context = "http://www.daostar.org/schemas"
     type    = "DAO"
 
 class EIP4824:
