@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, pre_dump
+from marshmallow import Schema, fields, pre_dump, post_dump
 from app.validators.fields import Caip10, Uri
 from app.validators.base import BaseSchema
 
@@ -13,14 +13,9 @@ class DaoUriSchema(BaseSchema):
     contractsRegistryURI = fields.String(skip_if=lambda x: x in [None, ""], required=False)
     managerAddress = fields.String(skip_if=lambda x: x in [None, ""], required=False)
 
-    @pre_dump
-    def remove_empty_fields(self, data, **kwargs):
-        """Remove fields with None or empty string values before dumping."""
-        data_dict = data.__dict__.copy()
-        for key in list(data_dict.keys()):  # list() to avoid RuntimeError due to change in dict size
-            if data_dict[key] in [None, ""]:
-                del data_dict[key]
-        return data_dict
+    @post_dump
+    def remove_empty_fields(self, data, many, **kwargs):
+        return {key: value for key, value in data.items() if value not in [None, "", {}]}
 
 class InputCaipWithDaoSchema(Schema):
     data = fields.Nested(DaoUriSchema, required=True)
