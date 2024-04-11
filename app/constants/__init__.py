@@ -47,8 +47,8 @@ class CAIP10:
     }
 
 class SchemaFormat:
-    context = "https://www.daostar.org/schemas"
-    type    = "DAO"
+    context = 'https://www.daostar.org/schemas'
+    type    = 'DAO'
 
 class EIP4824:
     ABI = json.load(open(Path(__file__).parent.absolute() / 'abi.json', 'r'))
