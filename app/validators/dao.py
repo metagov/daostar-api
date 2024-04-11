@@ -1,6 +1,12 @@
-from marshmallow import Schema, fields, validate
+from marshmallow import Schema, fields, post_load
 from app.validators.fields import Caip10, Uri
 from app.validators.base import BaseSchema
+
+class BaseSchema(Schema):
+    @post_load
+    def remove_empty_fields(self, data, **kwargs):
+        """Remove keys with None values or empty strings."""
+        return {key: value for key, value in data.items() if value not in [None, ""]}
 
 class DaoUriSchema(BaseSchema):
     name           = fields.String(default=None)
