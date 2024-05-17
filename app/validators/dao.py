@@ -13,9 +13,9 @@ class DaoUriSchema(BaseSchema):
     contractsRegistryURI = fields.String(skip_if=lambda x: x in [None, ""], required=False)
     managerAddress = fields.String(skip_if=lambda x: x in [None, ""], required=False)
 
-    @post_dump
-    def remove_empty_fields(self, data, many, **kwargs):
-        return {key: value for key, value in data.items() if value not in [None, "", {}]}
+    # @post_dump
+    # def remove_empty_fields(self, data, many, **kwargs):
+    #     return {key: value for key, value in data.items() if value not in [None, "", {}]}
 
 class InputCaipWithDaoSchema(Schema):
     data = fields.Nested(DaoUriSchema, required=True)
